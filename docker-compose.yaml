@@ -1,0 +1,26 @@
+version: "3.9"
+
+services:
+  api:
+    build: ./api
+    environment:
+      - DATA_DIR=/data
+      - DB_PATH=/data/app.duckdb
+    volumes:
+      - ./data:/data:rw
+    ports:
+      - "8000:8000"
+
+  app:
+    build: ./app
+    environment:
+      - EXPO_PUBLIC_API_BASE=http://localhost:8000
+      # - CI=1   # leave this out for hot reload
+      - CHOKIDAR_USEPOLLING=1     # helps file watching inside Docker on macOS
+    volumes:
+      - ./app:/app
+      - /app/node_modules         # keep container node_modules separate
+    depends_on:
+      - api
+    ports:
+      - "19006:19006"

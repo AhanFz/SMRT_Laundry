@@ -1,0 +1,8 @@
+{
+  "expo": {
+    "name": "csv-ai-assistant",
+    "slug": "csv-ai-assistant",
+    "platforms": ["ios","android","web"],
+    "assetBundlePatterns": ["**/*"]
+  }
+}
